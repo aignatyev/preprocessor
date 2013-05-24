@@ -30,6 +30,7 @@ public class TPreprocessor {
             }
             else if (line.startsWith("#if")){
                 parseIf(Arrays.copyOfRange(array, i, array.length));
+                i+=linesToPass(array, i);
             }
             else if(!line.startsWith("#")){
                 stringBuilder.append(line).append("\n");
@@ -42,10 +43,14 @@ public class TPreprocessor {
     private String parseIf(String[] restArray) {
         if (!expressionIsZero(restArray[0])) {
             parseStrings(Arrays.copyOfRange(restArray,
-                                            findNextElseOrEndIf(Arrays.copyOfRange(restArray, 1, restArray.length),
+                                            findElseOrEndIf(Arrays.copyOfRange(restArray, 1, restArray.length)),
                                             restArray.length));
         }
         return null;  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    private int findElseOrEndIf(String[] array) {
+
     }
 
 }
